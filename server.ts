@@ -3,6 +3,7 @@ import app from '../backend/src/app'
 import envConfig from './src/config/config'
 import connectToDatabase from './src/config/db'
 
+//comment
 
 const startServer = async ()=>{
     await connectToDatabase()
