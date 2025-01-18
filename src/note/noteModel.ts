@@ -10,7 +10,8 @@ const noteScheme = new mongoose.Schema<Note>({
     description : {
         type : String,
         required : true
-    }
+    },
+    file : String
 },{timestamps : true})
 
 export default mongoose.model<Note>("Note",noteScheme)
