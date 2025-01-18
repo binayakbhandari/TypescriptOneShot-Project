@@ -73,4 +73,4 @@ const deleteNote = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
-export {createNote}
+export {createNote, listNotes, listNote, deleteNote}
