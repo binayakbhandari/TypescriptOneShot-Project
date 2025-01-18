@@ -30,4 +30,47 @@ const createNote = async (req:Request, res:Response, next:NextFunction)=>{
     }
 }
 
+const listNotes = async (req:Request,res:Response, next:NextFunction)=>{
+try {
+    const notes = await noteModel.find()
+    res.status(200).json({
+        message : "Notes fetched",
+        data : notes
+    })
+} catch (error) {
+    return next(createHttpError(500, "Error while fetching notes..."))
+}
+}
+
+const listNote = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params
+        const note = await noteModel.findById(id)
+        if(!note){
+            return next(createHttpError(404, "Note not found with with that it"))
+        }
+        res.status(200).json({
+            message: "Note fetched",
+            data: note
+        })
+    } catch (error) {
+        return next(createHttpError(500, "Error while fetching note..."))
+    }
+}
+
+const deleteNote = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params
+        const note = await noteModel.findByIdAndDelete(id)
+        if(!note){
+            return next(createHttpError(404, "Note not found with with that it"))
+        }
+        res.status(200).json({
+            message: "Note deleted"
+        })
+    } catch (error) {
+        return next(createHttpError(500, "Error while deleting note..."))
+    }
+}
+
 export {createNote}
